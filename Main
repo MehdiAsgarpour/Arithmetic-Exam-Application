@@ -1,0 +1,74 @@
+# Function level 1
+def level_one():
+    from random import randint
+    operands = ['+', '-', '*']
+    n = 0
+    for i in range(5):
+        a = randint(2, 9)
+        b = randint(2, 9)
+        select = randint(0, 2)
+        right_answers = [a + b, a - b, a * b]
+        print(f'{a} {operands[select]} {b}')
+        loop = True
+        while loop == True:
+            answer = input()
+            try:
+                int(answer)
+                loop = False
+            except ValueError:
+                print('Incorrect format.')
+        if int(answer) == right_answers[select]:
+            print('Right!')
+            n += 1
+        else:
+            print('Wrong!')
+    return n
+# Function level 2
+def level_two():
+    from random import randint
+    n = 0
+    for i in range(5):
+        c = randint(11, 29)
+        print(c)
+        loop = True
+        while loop == True:
+            answer = input()
+            try:
+                int(answer)
+                loop = False
+            except ValueError:
+                print('Wrong format! Try again.')
+        if int(answer) == c ** 2:
+            print('Right!')
+            n += 1
+        else:
+            print('Wrong!')
+    return n
+# Main program
+level_list = ['1', '2']
+loop = True
+message = ['simple operations with numbers 2-9', 'integral squares of 11-29']
+while loop == True:
+    print('Which level do you want? Enter a number:')
+    print(f'1 - {message[0]}')
+    print(f'2 - {message[1]}')
+    level = input()
+    if level in level_list:
+        loop = False
+    else:
+        print('Incorrect format.')
+if level == '1':
+    N = level_one()
+    msg = message[0]
+else:
+    N = level_two()
+    msg = message[1]
+print(f'Your mark is {N}/5. Whould you like to save the result? Enter yes or no.')
+yes_no = input()
+accepted_yes = ['yes', 'YES', 'y', 'Yes']
+if yes_no in accepted_yes:
+    print('What is your name?')
+    name = input()
+    with open('results.txt', 'a', encoding='utf-8') as result_file:
+        result_file.write(f'{name}: {N}/5 in level {level} ({msg}).')
+        print('The results are saved in "results.txt".')
